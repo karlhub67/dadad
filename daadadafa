@@ -1,1 +1,1222 @@
-print("hello")
+if not _G.Karlhubv3 then
+    local player = game.Players.LocalPlayer
+    player:Kick("Unauthorized Execution: Please use the official Key System to run Script Name")
+    return
+end
+
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "KarlHub X Plant brainrot simulator",
+   Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
+   LoadingTitle = "Hi Exploiters",
+   LoadingSubtitle = "by Yumiiii",
+   ShowText = "KarlHub", -- for mobile users to unhide rayfield, change if you'd like
+   Theme = "Amethyst", -- Check https://docs.sirius.menu/rayfield/configuration/themes
+
+   ToggleUIKeybind = "K", -- The keybind to toggle the UI visibility (string like "K" or Enum.KeyCode)
+
+   DisableRayfieldPrompts = false,
+   DisableBuildWarnings = false, -- Prevents Rayfield from warning when the script has a version mismatch with the interface
+
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = "MyHubConfigs", -- Create a custom folder for your hub/game
+      FileName = "Default"
+   },
+
+   Discord = {
+      Enabled = false, -- Prompt the user to join your Discord server if their executor supports it
+      Invite = "u2TGHjNRRp", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ ABCD would be ABCD
+      RememberJoins = false -- Set this to false to make them join the discord every time they load it up
+   },
+
+   KeySystem = false, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "KeySystem",
+      Subtitle = "KeySystem",
+      Note = "Keyless every weekend", -- Use this to tell the user how to get a key
+      FileName = "MyHubConfigs", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"67"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+   }
+})
+
+
+local Main2Tab = Window:CreateTab("Important")
+Main2Tab:CreateSection("There's updated version ON discord!!")
+
+local Button = Main2Tab:CreateButton({
+   Name = "Click to get discord link ",
+   Callback = function()
+ local function runFunction()
+    setclipboard("https://discord.gg/u2TGHjNRRp")
+    warn("Link copied to clipboard")
+end
+
+runFunction()
+   end,
+})
+
+
+Main2Tab:CreateSection("Anti Afk!")
+
+
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local Running = false
+local thread
+
+local Toggle = Main2Tab:CreateToggle({
+    Name = "Anti AFK",
+    CurrentValue = false,
+    Flag = "AntiAFk",
+    Callback = function(Value)
+        if Value then
+            -- Toggle ON
+            Running = true
+            thread = task.spawn(function()
+                while Running do
+                    if player.Character and player.Character:FindFirstChild("Humanoid") then
+                        player.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+                    end
+                    -- wait 15 minutes before next jump
+                    local totalWait = 15 * 60 -- 15 minutes in seconds
+                    for i = 1, totalWait do
+                        if not Running then return end
+                        task.wait(1)
+                    end
+                end
+            end)
+        else
+            -- Toggle OFF
+            Running = false
+            if thread then
+                task.cancel(thread)
+            end
+        end
+    end,
+})
+
+Main2Tab:CreateSection("Auto Accept Trade!")
+
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local AutoFire = false
+
+Main2Tab:CreateToggle({
+    Name = "Auto Accept Trade",
+    CurrentValue = false,
+    Callback = function(Value)
+        AutoFire = Value
+
+        task.spawn(function()
+            while AutoFire do
+                local args = {
+                    [1] = "Business",
+                    [2] = "\231\164\188\231\137\169\232\181\160\233\128\129_\231\161\174\229\174\154",
+                    [3] = 3093022511
+                }
+
+                ReplicatedStorage
+                    :WaitForChild("RemoteEvent")
+                    :WaitForChild("ServerRemoteEvent")
+                    :FireServer(unpack(args))
+
+                task.wait(1) -- delay (change if needed)
+            end
+        end)
+    end
+})
+
+local Button = Main2Tab:CreateButton({
+   Name = "Rejoin Server",
+   Callback = function()
+     -- Manual Rejoin Script
+local TeleportService = game:GetService("TeleportService")
+
+-- Teleport to the same place and server
+local PlaceId = game.PlaceId
+local JobId = game.JobId
+
+print("🔄 Rejoining server...")
+TeleportService:TeleportToPlaceInstance(PlaceId, JobId)
+     end,
+})
+
+local Main67Tab = Window:CreateTab("Event", nil)
+local Section = Main67Tab:CreateSection("Auto Collect")
+
+local Button = Main67Tab:CreateButton({
+   Name = "Teleport To Event",
+   Callback = function()
+ local function runFunction()
+    local Players = game:GetService("Players")
+local localPlayer = Players.LocalPlayer
+local character = localPlayer.Character or localPlayer.CharacterAdded:Wait()
+local rootPart = character:WaitForChild("HumanoidRootPart")
+
+-- Define the target CFrame (position + orientation)
+local targetCFrame = CFrame.new(12473.5996, 10, -2936, -1, 0, 0, 0, 1, 0, 0, 0, -1) -- Change X, Y, Z as needed
+
+-- Optional: with rotation (position + lookAt direction)
+-- local targetCFrame = CFrame.new(Vector3.new(0, 10, 0), Vector3.new(100, 10, 0))
+
+-- Optional: with full rotation angles (in radians)
+-- local targetCFrame = CFrame.new(0, 10, 0) * CFrame.Angles(0, math.rad(90), 0)
+
+-- Teleport function
+local function teleportToCFrame(cf)
+    if character and rootPart then
+        rootPart.CFrame = cf
+        print("Teleported to:67")
+    else
+        warn("Character or RootPart not found!")
+    end
+end
+
+-- Execute teleport
+teleportToCFrame(targetCFrame)
+
+end
+
+runFunction()
+   end,
+})
+
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local Workspace = game:GetService("Workspace")
+local player = Players.LocalPlayer
+
+local AutoGetPlants = false
+local connection
+
+local FAR_DISTANCE = 400
+local NEAR_DISTANCE = 16
+local CurrentDistance = NEAR_DISTANCE
+
+local prompts = {}
+
+local function getRoot()
+    local char = player.Character
+    return char and char:FindFirstChild("HumanoidRootPart")
+end
+
+-- Store prompts
+for _, v in ipairs(Workspace:GetDescendants()) do
+    if v:IsA("ProximityPrompt") then
+        table.insert(prompts, v)
+    end
+end
+
+Workspace.DescendantAdded:Connect(function(obj)
+    if obj:IsA("ProximityPrompt") then
+        table.insert(prompts, obj)
+    end
+end)
+
+local function startLoop()
+    if connection then return end
+
+    connection = RunService.Heartbeat:Connect(function()
+        if not AutoGetPlants then return end
+
+        local root = getRoot()
+        if not root then return end
+
+        for i = #prompts, 1, -1 do
+            local prompt = prompts[i]
+            local parent = prompt and prompt.Parent
+
+            if not prompt or not parent then
+                table.remove(prompts, i)
+            else
+                -- Find a BasePart to measure from
+                local part = parent:IsA("BasePart") and parent
+                    or parent:FindFirstChildWhichIsA("BasePart")
+
+                if not part then
+                    table.remove(prompts, i)
+                else
+                    local dist = (part.Position - root.Position).Magnitude
+
+                    if dist <= CurrentDistance then
+                        prompt:InputHoldBegin()
+                        prompt:InputHoldEnd()
+                    end
+                end
+            end
+        end
+    end)
+end
+
+local function stopLoop()
+    if connection then
+        connection:Disconnect()
+        connection = nil
+    end
+end
+
+-- UI Toggle
+local Toggle = Main67Tab:CreateToggle({
+    Name = "Auto Get Plant",
+    CurrentValue = false,
+    Flag = "Auto67",
+    Callback = function(Value)
+        AutoGetPlants = Value
+
+        if Value then
+            CurrentDistance = FAR_DISTANCE -- 400
+            startLoop()
+        else
+            CurrentDistance = NEAR_DISTANCE -- 16
+            stopLoop()
+        end
+    end,
+})
+
+local Enabled = false
+local connection
+
+local function fixPrompt(prompt)
+    if Enabled then
+        prompt.HoldDuration = 0
+        prompt.MaxActivationDistance = 400 -- ON distance
+    else
+        prompt.MaxActivationDistance = 10 -- OFF distance
+    end
+end
+
+local function applyAll()
+    for _, obj in ipairs(workspace:GetDescendants()) do
+        if obj:IsA("ProximityPrompt") then
+            fixPrompt(obj)
+        end
+    end
+end
+
+local Toggle = Main67Tab:CreateToggle({
+    Name = "Click me",
+    CurrentValue = false,
+    Flag = "InstantPrompt",
+    Callback = function(Value)
+        Enabled = Value
+
+        if Enabled then
+            -- Apply to existing prompts
+            applyAll()
+
+            -- Listen for new prompts
+            connection = workspace.DescendantAdded:Connect(function(obj)
+                if obj:IsA("ProximityPrompt") then
+                    fixPrompt(obj)
+                end
+            end)
+        else
+            -- Turn OFF → reset all prompts to 10 studs
+            if connection then
+                connection:Disconnect()
+                connection = nil
+            end
+
+            applyAll() -- 🔥 this is important
+        end
+    end,
+})
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Remote = ReplicatedStorage:WaitForChild("RemoteEvent"):WaitForChild("ServerRemoteEvent")
+
+local Running = false
+local thread
+
+local Toggle = Main67Tab:CreateToggle({
+    Name = "Auto Claim Plants",
+    CurrentValue = false,
+    Flag = "Toggle1",
+    Callback = function(Value)
+        if Value then
+            -- Toggle ON
+            Running = true
+            thread = task.spawn(function()
+                while Running do
+                    local args = {
+                        "Tsunami_GotoSafetyLine"
+                    }
+                    Remote:FireServer(unpack(args))
+                    task.wait(1) -- adjust delay as needed
+                end
+            end)
+        else
+            -- Toggle OFF
+            Running = false
+            if thread then
+                task.cancel(thread)
+            end
+        end
+    end,
+})
+
+local Main1Tab = Window:CreateTab("Main🏠", nil) -- Title, Image
+local Section = Main1Tab:CreateSection("Online Claim")
+
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local remote = ReplicatedStorage:WaitForChild("RemoteEvent"):WaitForChild("ServerRemoteEvent")
+
+local AutoClaimGift = false
+
+local Toggle = Main1Tab:CreateToggle({
+    Name = "Auto Claim Gift",
+    CurrentValue = false,
+    Flag = "AutoClaimgift",
+
+    Callback = function(Value)
+        AutoClaimGift = Value
+
+        -- START LOOP WHEN ON
+        if AutoClaimGift then
+            task.spawn(function()
+                while AutoClaimGift do
+                    -- claim gifts 1 → 12
+                    for i = 1, 12 do
+                        if not AutoClaimGift then return end
+
+                        local args = {
+                            "GetOnlineGift",
+                            i
+                        }
+
+                        remote:FireServer(unpack(args))
+
+                        -- 0.3s delay (instantly stoppable)
+                        for t = 1, 3 do
+                            if not AutoClaimGift then return end
+                            task.wait(0.1)
+                        end
+                    end
+
+                    -- 30s cooldown before restarting (stoppable)
+                    for t = 1, 100 do
+                        if not AutoClaimGift then return end
+                        task.wait(1)
+                    end
+                end
+            end)
+        end
+        -- OFF → AutoClaimGift = false → loop exits
+    end,
+})
+
+local Section = Main1Tab:CreateSection("Super Seed Event")
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local remote = ReplicatedStorage:WaitForChild("RemoteEvent"):WaitForChild("ServerRemoteEvent")
+
+local AutoClaimEvent = false
+
+local Toggle = Main1Tab:CreateToggle({
+    Name = "Auto Claim Event",
+    CurrentValue = false,
+    Flag = "AutoclaimEvent",
+
+    Callback = function(Value)
+        AutoClaimEvent = Value
+
+        -- START LOOP WHEN ON
+        if AutoClaimEvent then
+            task.spawn(function()
+                while AutoClaimEvent do
+                    -- loop 1 → 7
+                    for i = 1, 18 do
+                        if not AutoClaimEvent then return end
+
+                        local args = {
+                            "Business",
+                            "\229\133\145\230\141\162\230\153\174\233\128\154\230\180\187\229\138\168\229\165\150\229\138\177",
+                            i
+                        }
+
+                        remote:FireServer(unpack(args))
+
+                        -- 0.5s delay (instantly stoppable)
+                        for t = 1, 5 do
+                            if not AutoClaimEvent then return end
+                            task.wait(0.1)
+                        end
+                    end
+
+                    -- 60s cooldown before restarting (stoppable)
+                    for t = 1, 60 do
+                        if not AutoClaimEvent then return end
+                        task.wait(5)
+                    end
+                end
+            end)
+        end
+        -- OFF → AutoClaimEvent = false → loop exits
+    end,
+})
+
+
+local Section = Main1Tab:CreateSection("Seed Event")
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local remote = ReplicatedStorage:WaitForChild("RemoteEvent"):WaitForChild("ServerRemoteEvent")
+
+local AutoClaim = false
+
+local Toggle = Main1Tab:CreateToggle({
+    Name = "Auto Claim",
+    CurrentValue = false,
+    Flag = "Autoclaimegg",
+
+    Callback = function(Value)
+        AutoClaim = Value
+
+        -- START LOOP WHEN ON
+        if AutoClaim then
+            task.spawn(function()
+                while AutoClaim do
+                    local args = {
+                        "OpenEventEgg",
+                        2
+                    }
+
+                    remote:FireServer(unpack(args))
+
+                    -- 0.2s cooldown, instantly stoppable
+                    for i = 1, 2 do
+                        if not AutoClaim then break end
+                        task.wait(0.1)
+                    end
+                end
+            end)
+        end
+        -- OFF → AutoClaim = false → loop exits
+    end,
+})
+
+local Section = Main1Tab:CreateSection("Spin The wheel")
+
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local remote = ReplicatedStorage:WaitForChild("RemoteEvent"):WaitForChild("ServerRemoteEvent")
+
+local AutoSpin = false
+
+local Toggle = Main1Tab:CreateToggle({
+    Name = "Auto Spin",
+    CurrentValue = false,
+    Flag = "Autospin",
+
+    Callback = function(Value)
+        AutoSpin = Value
+
+        -- START LOOP
+        if AutoSpin then
+            task.spawn(function()
+                while AutoSpin do
+                    local args = {
+                        "OpenSpecialEgg",
+                        "\232\189\172\231\155\152\232\155\139"
+                    }
+
+                    remote:FireServer(unpack(args))
+
+                    -- 1s cooldown (instantly stoppable)
+                    for i = 1, 10 do
+                        if not AutoSpin then break end
+                        task.wait(0.1)
+                    end
+                end
+            end)
+        end
+        -- OFF → AutoSpin becomes false → loop exits
+    end,
+})
+
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local remote = ReplicatedStorage:WaitForChild("RemoteEvent"):WaitForChild("ServerRemoteEvent")
+
+local AutoFight = false
+local Cooldown = 1 -- seconds
+local LastFire = 0
+
+local Toggle = Main1Tab:CreateToggle({
+    Name = "Auto Fight Boss",
+    CurrentValue = false,
+    Flag = "Autoboss",
+
+    Callback = function(Value)
+        AutoFight = Value
+
+        if AutoFight then
+            task.spawn(function()
+                while AutoFight do
+                    local now = os.clock()
+
+                    -- cooldown check
+                    if now - LastFire >= Cooldown then
+                        LastFire = now
+
+                        local args = {
+                            [1] = "Business",
+                            [2] = "\228\184\150\231\149\140Boss",
+                            [3] = 1,
+                            [4] = 1
+                        }
+
+                        remote:FireServer(unpack(args))
+                    end
+
+                    -- tiny yield so Roblox doesn't freeze
+                    task.wait()
+                end
+            end)
+        end
+    end,
+})
+
+
+local Section = Main1Tab:CreateSection("Once you on the button it won't stop.")
+
+local Main5Tab = Window:CreateTab("Auto Plating🌱", nil ) -- Title, Image
+
+
+local Section = Main5Tab:CreateSection("Shovel All Plant")
+
+
+local Running = false
+local thread
+
+local Toggle = Main5Tab:CreateToggle({
+    Name = "Auto Shovel All",
+    CurrentValue = false,
+    Flag = "Autoplantsystem1",
+    Callback = function(Value)
+        local remote = game:GetService("ReplicatedStorage").RemoteEvent.ServerRemoteEvent
+
+        if Value then
+            -- Toggle ON
+            Running = true
+            thread = task.spawn(function()
+                while Running do
+                    -- Shovel (2)
+                    remote:FireServer("Change_ArrayBool_Item", "\230\137\139\231\137\140", 2)
+                    task.wait(0.5)
+
+                    -- Plant (1)
+                    remote:FireServer("Change_ArrayBool_Item", "\230\137\139\231\137\140", 1)
+                    task.wait(0.5)
+
+                    -- Business loop infinitely
+                    for i = 1, 54 do
+                        if not Running then return end  -- Stop immediately if toggle OFF
+                        remote:FireServer("Business", "\230\139\190\229\143\150_\229\174\160\231\137\169", i)
+                        task.wait(0.2)
+                    end
+                    task.wait(0.5)
+                end
+            end)
+        else
+            -- Toggle OFF
+            Running = false
+            if thread then
+                task.cancel(thread)
+            end
+        end
+    end,
+})
+
+local Section = Main5Tab:CreateSection("Plant All")
+
+local Running = false
+local thread
+
+local Toggle = Main5Tab:CreateToggle({
+    Name = "Auto Plant All",
+    CurrentValue = false,
+    Flag = "Autoplantsystem",
+    Callback = function(Value)
+        local remote = game:GetService("ReplicatedStorage").RemoteEvent.ServerRemoteEvent
+
+        if Value then
+            -- Toggle ON
+            Running = true
+            thread = task.spawn(function()
+                while Running do
+                    -- Plant first seeds
+                    remote:FireServer("Change_ArrayBool_Item", "\230\137\139\231\137\140", 1)
+                    task.wait(0.6)
+
+                    remote:FireServer("Change_ArrayBool_Item", "\230\137\139\231\137\140", 3)
+                    task.wait(0.6)
+
+                    -- Business loop infinitely
+                    for i = 1, 54 do
+                        if not Running then return end  -- Stop immediately if toggle OFF
+                        remote:FireServer("Business", "\230\148\190\231\189\174_\229\174\160\231\137\169", i)
+                        task.wait(0.12)
+                    end
+                    task.wait(0.5)
+                end
+            end)
+        else
+            -- Toggle OFF
+            Running = false
+            if thread then
+                task.cancel(thread)
+            end
+        end
+    end,
+})
+
+local Section = Main5Tab:CreateSection("Water All Plant")
+
+local Running = false
+local thread
+
+local Toggle = Main5Tab:CreateToggle({
+Name = "Auto Water Seed",
+    CurrentValue = false,
+    Flag = "AutoBusinessToggle21",
+    Callback = function(Value)
+        local remote = game:GetService("ReplicatedStorage"):WaitForChild("RemoteEvent"):WaitForChild("ServerRemoteEvent")
+
+        if Value then
+            -- Toggle ON
+            Running = true
+            thread = task.spawn(function()
+                while Running do
+                    for i = 1, 54 do
+                        if not Running then return end  -- Stop immediately if toggle OFF
+
+                        local args = {
+                            [1] = "Business",
+                            [2] = "变化_宠物",
+                            [3] = i
+                        }
+                        remote:FireServer(unpack(args))
+                        task.wait(0.25) -- adjust delay as needed
+                    end
+                    task.wait(0.2) -- small delay before next loop
+                end
+            end)
+        else
+            -- Toggle OFF
+            Running = false
+            if thread then
+                task.cancel(thread)
+            end
+        end
+    end,
+})
+
+
+local MainTab = Window:CreateTab("Auto Buy🏪", nil ) -- Title, Image
+local Section = MainTab:CreateSection("Auto Buy All Seed🌾")
+
+--------------------------------------------------
+-- SERVICES
+-------------------------------------------a-------
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local remote = ReplicatedStorage:WaitForChild("RemoteEvent"):WaitForChild("ServerRemoteEvent")
+
+--------------------------------------------------
+-- STATE
+--------------------------------------------------
+local ActiveThreads = {}
+local Running = false
+
+--------------------------------------------------
+-- SEED → PATTERN ID
+--------------------------------------------------
+local SeedPatternMap = {
+    ["Tomato Seed"] = 1,
+    ["Pumpkin Seed"] = 2,
+    ["Melon Seed"] = 3,
+    ["Mini Corn Seed"] = 4,
+    ["Mushroom Seed"] = 5,
+    ["Cactus Seed"] = 6,
+    ["Broccoli Seed"] = 7,
+    ["Sunflower Seed"] = 8,
+    ["Chrysanthemum Seed"] = 9,
+    ["Peashooter Seed"] = 10,
+    ["Corn Seed"] = 11,
+    ["Cactus Flower Seed"] = 12,
+    ["Fire Peashooter Seed"] = 13,
+    ["Threepeater Seed"] = 14,
+    ["Man-Eating Seed"] = 15,
+    ["Alien Onion Seed"] = 16,
+    ["Capsid Brute Seed"] = 17,
+    ["Shroombloom Sun Seed"] = 18, 
+    ["Watermelon Baron Seed"] = 19,
+    ["Baron Pumpkin Seed"] = 20,
+    ["Dual-Cannon Shooter Seed"] = 21,
+    ["Coconut Cannon Seed"] = 22,
+    ["Multi-Cannon Mushroom Seed"] = 23,-- ✅ NEW
+}
+
+--------------------------------------------------
+-- INTERRUPTIBLE WAIT
+--------------------------------------------------
+local function interruptibleWait(seconds)
+    local loops = seconds * 5 -- 0.2s resolution
+    for i = 1, loops do
+        if not Running then
+            return false
+        end
+        task.wait(0.2)
+    end
+    return true
+end
+
+--------------------------------------------------
+-- STOP ALL TASKS
+--------------------------------------------------
+local function stopAll()
+    Running = false
+    for _, thread in ipairs(ActiveThreads) do
+        task.cancel(thread)
+    end
+    table.clear(ActiveThreads)
+end
+
+--------------------------------------------------
+-- SEED → GAP (seconds after each buy sequence)
+--------------------------------------------------
+
+--------------------------------------------------
+-- START AUTO BUY (with gap per seed)
+--------------------------------------------------
+--------------------------------------------------
+-- START AUTO BUY (fixed 1s gap between seeds)
+--------------------------------------------------
+local function startAutoBuy(selectedSeeds)
+    stopAll()
+    Running = true
+
+    local lastTriggeredMinute = -1
+
+    local thread = task.spawn(function()
+        -- ===== INSTANT BUY =====
+        for _, seedName in ipairs(selectedSeeds) do
+            if not Running then return end
+            local patternId = SeedPatternMap[seedName]
+            if not patternId then continue end
+
+            -- buy 15x with 1s delay per buy
+            for i = 1, 5 do
+                if not Running then return end
+
+                local itemName = "\231\167\141\229\173\144"
+                if patternId == 18 then
+                    itemName = "\229\164\169\230\176\148\231\167\141\229\173\144"
+                end
+
+                remote:FireServer("Buy_ArrayBool_Item", itemName, patternId)
+                task.wait(0.15)  -- ✅ 1 second between each buy
+            end
+
+            task.wait(0.6) -- ✅ 1 second gap before next seed
+        end
+
+        -- ===== SERVER-TIME SCHEDULE =====
+        while Running do
+            local now = os.date("*t")
+            local minute = now.min
+
+            if minute % 5 == 0 and minute ~= lastTriggeredMinute then
+                lastTriggeredMinute = minute
+
+                for _, seedName in ipairs(selectedSeeds) do
+                    if not Running then return end
+                    local patternId = SeedPatternMap[seedName]
+                    if not patternId then continue end
+
+                    for i = 1, 5 do
+                        if not Running then return end
+
+                        local itemName = "\231\167\141\229\173\144"
+                        if patternId == 18 then
+                            itemName = "\229\164\169\230\176\148\231\167\141\229\173\144"
+                        end
+
+                        remote:FireServer("Buy_ArrayBool_Item", itemName, patternId)
+                        task.wait(0.1)  -- 1 second per buy
+                    end
+
+                    task.wait(0.5) -- 1 second gap before next seed
+                end
+            end
+
+            task.wait(1) -- check server time every second
+        end
+    end)
+
+    table.insert(ActiveThreads, thread)
+end
+
+
+--------------------------------------------------
+-- DROPDOWN
+--------------------------------------------------
+MainTab:CreateDropdown({
+    Name = "Auto Buy Seed",
+    Options = {
+        "None",
+        "Tomato Seed","Pumpkin Seed","Melon Seed","Mini Corn Seed",
+        "Mushroom Seed","Cactus Seed","Broccoli Seed","Sunflower Seed",
+        "Chrysanthemum Seed","Peashooter Seed","Corn Seed",
+        "Cactus Flower Seed","Fire Peashooter Seed","Threepeater Seed",
+        "Man-Eating Seed","Alien Onion Seed","Capsid Brute Seed",
+        "Chrysanthemum Maneater Seed" -- ✅ LAST OPTION
+    },
+    MultipleOptions = true,
+    Flag = "AutoBuyItmes",
+    Callback = function(Options)
+
+        -- NONE = STOP EVERYTHING
+        if table.find(Options, "None") or #Options == 0 then
+            stopAll()
+            return
+        end
+
+        -- start multi-seed auto buy
+        startAutoBuy(Options)
+    end,
+})
+
+--// SERVICES
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local remote = ReplicatedStorage:WaitForChild("RemoteEvent"):WaitForChild("ServerRemoteEvent")
+
+
+--// SEEDS
+local SeedPatternMap = {
+    ["Tomato Seed"] = 1,
+    ["Pumpkin Seed"] = 2,
+    ["Melon Seed"] = 3,
+    ["Mini Corn Seed"] = 4,
+    ["Mushroom Seed"] = 5,
+    ["Cactus Seed"] = 6,
+    ["Broccoli Seed"] = 7,
+    ["Sunflower Seed"] = 8,
+    ["Chrysanthemum Seed"] = 9,
+    ["Peashooter Seed"] = 10,
+    ["Corn Seed"] = 11,
+    ["Cactus Flower Seed"] = 12,
+    ["Fire Peashooter Seed"] = 13,
+    ["Threepeater Seed"] = 14,
+    ["Man-Eating Seed"] = 15,
+    ["Alien Onion Seed"] = 16,
+    ["Capsid Brute Seed"] = 17,
+    ["Shroombloom Sun Seed"] = 18, 
+    ["Watermelon Baron Seed"] = 19,
+    ["Baron Pumpkin Seed"] = 20,
+    ["Dual-Cannon Shooter Seed"] = 21,
+    ["Coconut Cannon Seed"] = 22,
+    ["Multi-Cannon Mushroom Seed"] = 23,-- ✅ NEW
+}
+
+--// VARIABLES
+local Running = false
+local ActiveThreads = {}
+
+--// STOP FUNCTION
+local function stopAll()
+    Running = false
+    for _, t in ipairs(ActiveThreads) do
+        task.cancel(t)
+    end
+    table.clear(ActiveThreads)
+end
+
+--// BUY FUNCTION (ALL SEEDS x7 FAST)
+local function buyAllSeeds()
+    for seedName, patternId in pairs(SeedPatternMap) do
+        if not Running then return end
+
+        local itemName = "\231\167\141\229\173\144"
+        if patternId == 18 then
+            itemName = "\229\164\169\230\176\148\231\167\141\229\173\144"
+        end
+
+        for i = 1, 7 do
+            if not Running then return end
+
+            remote:FireServer("Buy_ArrayBool_Item", itemName, patternId)
+            task.wait(0.03) -- ⚡ super fast but still safe
+        end
+
+        task.wait(0.2) -- small gap between seeds
+    end
+end
+
+--// START AUTO BUY (WITH REAL TIME RESTOCK)
+local function startAutoBuy()
+    stopAll()
+    Running = true
+
+    local lastTriggeredMinute = -1
+
+    local thread = task.spawn(function()
+
+        -- ===== FIRST INSTANT BUY =====
+        buyAllSeeds()
+
+        -- ===== REAL TIME LOOP =====
+        while Running do
+            local minute = tonumber(os.date("%M"))
+
+            -- 🔥 trigger every 5 mins (5,10,15...)
+            if minute % 5 == 0 and minute ~= lastTriggeredMinute then
+                lastTriggeredMinute = minute
+
+                buyAllSeeds()
+            end
+
+            task.wait(1)
+        end
+    end)
+
+    table.insert(ActiveThreads, thread)
+end
+
+--// TOGGLE
+MainTab:CreateToggle({
+    Name = "Auto Buy All Seeds",
+    CurrentValue = false,
+    Callback = function(value)
+        if value then
+            startAutoBuy()
+        else
+            stopAll()
+        end
+    end,
+})
+
+
+local Main3Tab = Window:CreateTab("Auto Buy Gear⚙️", nil) -- Title, Image
+local Section = Main3Tab:CreateSection("Auto Buy All Gear⚙️")
+--------------------------------------------------
+-- SERVICES
+--------------------------------------------------
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local remote = ReplicatedStorage:WaitForChild("RemoteEvent"):WaitForChild("ServerRemoteEvent")
+
+--------------------------------------------------
+-- STATE
+--------------------------------------------------
+local ActiveThreads = {}
+local Running = false
+
+--------------------------------------------------
+-- ITEM → ID AND GAPS
+--------------------------------------------------
+local ItemMap = {
+    ["Water Bucket"] = {id = 1, gap = 60},
+    ["Yellow Bucket"] = {id = 9, gap = 61},
+    ["Orange Bucket"] = {id = 10, gap = 62},
+    ["Purple Bucket"] = {id = 11, gap = 63},
+    ["Granade"] = {id = 2, gap = 64},
+    ["Reversion Fruit"] = {id = 8, gap = 65},
+    ["Frozen Fruit"] = {id = 3, gap = 66},
+    ["Flame Fruit"] = {id = 10, gap = 67},
+    ["Venom Fruit"] = {id = 5, gap = 68},
+    ["Darkness Fruit"] = {id = 6, gap = 69},
+    ["Bomb Fruit"] = {id = 7, gap = 70},
+    ["Kg Fruit"] = {id = 12, gap = 72},
+}
+
+--------------------------------------------------
+-- INTERRUPTIBLE WAIT
+--------------------------------------------------
+local function interruptibleWait(seconds)
+    for i = 1, seconds do
+        if not Running then
+            return false
+        end
+        task.wait(0.2)
+    end
+    return true
+end
+
+--------------------------------------------------
+-- STOP ALL TASKS
+--------------------------------------------------
+local function stopAll()
+    Running = false
+    for _, thread in ipairs(ActiveThreads) do
+        task.cancel(thread)
+    end
+    table.clear(ActiveThreads)
+end
+
+--------------------------------------------------
+-- START AUTO BUY / COLLECT ITEMS
+--------------------------------------------------
+local function startAutoBuy(selectedItems)
+    stopAll()
+    Running = true
+
+    for index, itemName in ipairs(selectedItems) do
+        local itemData = ItemMap[itemName]
+        if not itemData then continue end
+        local itemId = itemData.id
+        local gap = itemData.gap
+
+        local thread = task.spawn(function()
+            -- 1s offset per item to prevent overlap
+            task.wait((index - 1) * 1)
+
+            while Running do
+                -- loop 10 times per cycle
+                for i = 1, 10 do
+                    if not Running then return end
+
+                    local args = {
+                        "Buy_ArrayBool_Item",
+                        "\233\129\147\229\133\183", -- placeholder type
+                        itemId
+                    }
+
+                    remote:FireServer(unpack(args))
+                    task.wait(0.2) -- 1 second between each buy
+                end
+
+                -- per-item dynamic cooldown
+                if not interruptibleWait(gap) then return end
+            end
+        end)
+
+        table.insert(ActiveThreads, thread)
+    end
+end
+
+--------------------------------------------------
+-- DROPDOWN + TOGGLE
+--------------------------------------------------
+-- Dropdown to select items
+local Dropdown = Main3Tab:CreateDropdown({
+    Name = "Auto Buy Items",
+    Options = {
+        "None",
+        "Water Bucket","Yellow Bucket","Orange Bucket","Purple Bucket",
+        "Granade","Reversion Fruit","Frozen Fruit","Flame Fruit",
+        "Venom Fruit","Darkness Fruit","Bomb Fruit","Kg Fruit"
+    },
+    CurrentValue = "None",
+    MultipleOptions = true,
+    Flag = "AutoBuyItmes",
+    Callback = function(Options)
+        -- NONE = stop everything
+        if table.find(Options, "None") or #Options == 0 then
+            stopAll()
+            return
+        end
+
+        -- start multi-item auto-buy
+        startAutoBuy(Options)
+    end,
+})
+
+--// SERVICES
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local remote = ReplicatedStorage:WaitForChild("RemoteEvent"):WaitForChild("ServerRemoteEvent")
+
+--// GEARS (ONLY ID, NO GAP)
+local GearMap = {
+    ["Water Bucket"] = 1,
+    ["Yellow Bucket"] = 9,
+    ["Orange Bucket"] = 10,
+    ["Purple Bucket"] = 11,
+    ["Grenade"] = 2,
+    ["Reversion Fruit"] = 8,
+    ["Frozen Fruit"] = 3,
+    ["Flame Fruit"] = 4,
+    ["Venom Fruit"] = 5,
+    ["Darkness Fruit"] = 6,
+    ["Bomb Fruit"] = 7,
+    ["Kg Fruit"] = 12,
+}
+
+--// VARIABLES
+local Running = false
+local ActiveThreads = {}
+
+--// STOP FUNCTION
+local function stopAll()
+    Running = false
+    for _, t in ipairs(ActiveThreads) do
+        task.cancel(t)
+    end
+    table.clear(ActiveThreads)
+end
+
+--// BUY FUNCTION (ALL GEARS x7 FAST)
+local function buyAllGears()
+    for gearName, gearId in pairs(GearMap) do
+        if not Running then return end
+
+        -- ⚠️ CHANGE THIS IF DIFFERENT FOR YOUR GAME
+        local itemName = "\233\129\147\229\133\183"
+
+        for i = 1, 7 do
+            if not Running then return end
+
+            remote:FireServer("Buy_ArrayBool_Item", itemName, gearId)
+            task.wait(0.03) -- ⚡ fast
+        end
+
+        task.wait(0.2) -- small gap between gears
+    end
+end
+
+--// START AUTO BUY (REAL TIME RESTOCK)
+local function startAutoBuy()
+    stopAll()
+    Running = true
+
+    local lastTriggeredMinute = -1
+
+    local thread = task.spawn(function()
+
+        -- FIRST BUY
+        buyAllGears()
+
+        -- TIME LOOP
+        while Running do
+            local minute = tonumber(os.date("%M"))
+
+            -- every 5 mins
+            if minute % 5 == 0 and minute ~= lastTriggeredMinute then
+                lastTriggeredMinute = minute
+
+                buyAllGears()
+            end
+
+            task.wait(1)
+        end
+    end)
+
+    table.insert(ActiveThreads, thread)
+end
+
+--// TOGGLE
+Main3Tab:CreateToggle({
+    Name = "Auto Buy All Gears",
+    CurrentValue = false,
+    Callback = function(value)
+        if value then
+            startAutoBuy()
+        else
+            stopAll()
+        end
+    end,
+})
