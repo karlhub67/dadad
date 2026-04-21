@@ -1,8 +1,3 @@
-if not _G.KarlhubV3 then
-    local player = game.Players.LocalPlayer
-    player:Kick("Unauthorized Execution: Please use the official Key System to run Script Name")
-    return
-end
 
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
